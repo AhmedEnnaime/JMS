@@ -10,13 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JmsApplication {
 
 	public static void main(String[] args) throws Exception {
-		ActiveMQServer activeMQServer = ActiveMQServers.newActiveMQServer(
-				new ConfigurationImpl().setPersistenceEnabled(true)
-						.setJournalDirectory("target/data/journal")
-						.setSecurityEnabled(false)
-						.addAcceptorConfiguration("invm", "vm://0")
-		);
-		activeMQServer.start();
+		ActiveMQServer server = ActiveMQServers.newActiveMQServer(new ConfigurationImpl()
+				.setPersistenceEnabled(false)
+				.setJournalDirectory("target/data/journal")
+				.setSecurityEnabled(false)
+				.addAcceptorConfiguration("invm", "vm://0"));
+
+		server.start();
 		SpringApplication.run(JmsApplication.class, args);
 	}
 
